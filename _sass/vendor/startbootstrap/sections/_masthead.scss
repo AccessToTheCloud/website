@@ -1,0 +1,94 @@
+//
+// Masthead section styling
+//
+#page-container {
+  position: relative;
+  z-index: 2;
+}
+
+#services {
+  background: white;
+}
+
+#page-background {
+  background: linear-gradient(135deg, #0000ad 0%, #46807c 100%);
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+}
+
+// Make sure the footer doesn't lift up
+.full-page-content {
+  min-height: 70vh;
+}
+
+header.masthead {
+  padding-top: 4.5rem;
+
+  //padding-bottom: 6rem;
+  text-align: center;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &.masthead-full {
+    height: 100vh;
+  }
+
+  &.masthead-small {
+    height: 30vh;
+  }
+
+  .masthead-subheading {
+    font-size: 1.5rem;
+
+    //font-style: italic;
+    line-height: 1.5rem;
+    margin-bottom: 25px;
+    font-family: $subheadings-font-family;
+  }
+
+  .masthead-heading {
+    font-size: 3.25rem;
+    font-weight: 700;
+    line-height: 3.25rem;
+    margin-bottom: 2rem;
+    font-family: $headings-font-family;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  header.masthead {
+    padding-top: 6rem;
+
+    //padding-bottom: 12.5rem;
+
+    &.masthead-full {
+      height: 100vh;
+    }
+
+    &.masthead-small {
+      height: 30vh;
+    }
+
+    .masthead-subheading {
+      font-size: 2.25rem;
+
+      //font-style: italic;
+      line-height: 2.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .masthead-heading {
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 4.5rem;
+      margin-bottom: 4rem;
+    }
+  }
+}
