@@ -6,17 +6,15 @@ endif
 
 # Primary targets
 
-deploy: guard-AZURE_ACCOUNT_NAME guard-AZURE_SERVICE_PRINCIPAL_USERNAME guard-AZURE_SERVICE_PRINCIPAL_PASSWORD guard-AZURE_SERVICE_PRINCIPAL_TENANT #build
+deploy: guard-AZURE_ACCOUNT_NAME build azure-login
 	$(eval NOW=$(shell date -u '+%FT%TZ'))
 	# Upload to azure all the files in the _site build folder
 	@echo 'Time is $(NOW)'
-	az login --service-principal --username $(AZURE_SERVICE_PRINCIPAL_USERNAME) --password=$(AZURE_SERVICE_PRINCIPAL_PASSWORD) --tenant $(AZURE_SERVICE_PRINCIPAL_TENANT)
 	az storage blob upload-batch --auth-mode login --source ./_site --destination '$$web' --account-name $(AZURE_ACCOUNT_NAME) --overwrite
 	# Remove any dangling files that may be left over in azure
 	# i.e any files that didn't get touched during this deployment
 	@echo 'Removing all files that are unmodified since $(NOW)'
 	az storage blob delete-batch --auth-mode login --source '$$web' --account-name $(AZURE_ACCOUNT_NAME) --if-unmodified-since '$(NOW)'
-	az logout
 
 install:
 	bundle install
@@ -35,6 +33,10 @@ clean:
 	rm -rf ./_site
 
 # Secondary targets
+
+azure-login: guard-AZURE_SERVICE_PRINCIPAL_USERNAME guard-AZURE_SERVICE_PRINCIPAL_PASSWORD guard-AZURE_SERVICE_PRINCIPAL_TENANT
+	@echo 'Logging into azure with service principal...'
+	@az login --service-principal --username $(AZURE_SERVICE_PRINCIPAL_USERNAME) --password=$(AZURE_SERVICE_PRINCIPAL_PASSWORD) --tenant $(AZURE_SERVICE_PRINCIPAL_TENANT)
 
 dev-jekyll-server: build
 	bundle exec jekyll serve --livereload --open-url --port 4001 --livereload-port 35730

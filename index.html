@@ -99,7 +99,9 @@ layout: default
           </div>
         </div>
       </div>
-      <div class="col-md-6 d-flex order-1 order-md-2 flex-column justify-content-around">
+      <div
+        class="col-md-6 d-flex order-1 order-md-2 flex-column justify-content-around"
+      >
         <div>
           <h2>Have specific requirements that need a special touch?</h2>
           <p>
@@ -139,10 +141,77 @@ layout: default
     <div class="text-center">
       <h2 class="section-heading text-uppercase" id="contact">Contact Us</h2>
     </div>
+    <form id="contactForm">
+      <div class="row align-items-stretch mb-5">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              class="form-control"
+              id="contact-name"
+              type="text"
+              placeholder="Your Name *"
+              required
+            />
+            <div class="invalid-feedback">A name is required.</div>
+          </div>
+          <div class="form-group">
+            <!-- Email address input-->
+            <input
+              class="form-control"
+              id="contact-email"
+              type="email"
+              placeholder="Your Email *"
+              required
+            />
+            <div class="invalid-feedback">An email is required.</div>
+            <div class="invalid-feedback">Email is not valid.</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group form-group-textarea mb-md-0">
+            <!-- Message input-->
+            <textarea
+              class="form-control"
+              id="contact-message"
+              placeholder="Your Message *"
+              required
+            ></textarea>
+            <div class="invalid-feedback">A message is required.</div>
+          </div>
+        </div>
+        <!-- Submit success message-->
+        <div
+          class="alert alert-success text-center d-none"
+          role="alert"
+          id="submit-success-message"
+        >
+          Message received! We'll be in touch with you soon.
+        </div>
+        <!-- Submit error message-->
+        <div
+          class="alert alert-danger text-center d-none"
+          role="alert"
+          id="submit-error-message"
+        >
+          There was a problem sending your message 😢. Perhaps just email us
+          directly?
+        </div>
+      </div>
+      <!-- Submit Button-->
+      <div class="text-center">
+        <button
+          class="btn btn-primary btn-xl text-uppercase"
+          id="submitButton"
+          type="submit"
+        >
+          Send Message
+        </button>
+      </div>
+    </form>
     <div class="text-center text-light">
       <p>
         <br />
-        Please email us directly at
+        Or email us at
         <a href="mailto:contact@accesstothecloud.com"
           >contact@accesstothecloud.com</a
         >

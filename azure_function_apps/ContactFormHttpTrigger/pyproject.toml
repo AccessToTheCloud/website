@@ -8,7 +8,7 @@ authors = ["Tom Barone <mail@tombarone.net>"]
 python = "^3.10"
 azure-functions = "^1.12.0"
 flanker = "^0.9.11"
-sendgrid = "^6.9.7"
+azure-communication-email = "^1.0.0b1"
 
 [build-system]
 requires = ["poetry-core"]
