@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {% seo %} {% feed_meta %}
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#2b5797" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/base.css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/import.css" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="page-container">{{ content }}</div>
+    <div id="page-background">
+      <canvas class="particles"></canvas>
+    </div>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Cool looking particle things for the masthead -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Core theme JS-->
+    <script>
+      window.addEventListener("DOMContentLoaded", (event) => {
+        // Navbar shrink function
+        var navbarShrink = function () {
+          const navbarCollapsible = document.body.querySelector("#mainNav");
+          if (!navbarCollapsible) {
+            return;
+          }
+          if (window.scrollY === 0) {
+            navbarCollapsible.classList.remove("navbar-shrink");
+          } else {
+            navbarCollapsible.classList.add("navbar-shrink");
+          }
+        };
+        Particles.init({
+          selector: ".particles",
+          color: "#ffc800",
+          connectParticles: true,
+          speed: 0.2,
+          responsive: [
+            {
+              breakpoint: 768,
+              options: {
+                maxParticles: 100,
+              },
+            },
+            {
+              breakpoint: 425,
+              options: {
+                maxParticles: 50,
+              },
+            },
+          ],
+        });
+
+        // Shrink the navbar
+        navbarShrink();
+
+        // Shrink the navbar when page is scrolled
+        document.addEventListener("scroll", navbarShrink);
+
+        // Activate Bootstrap scrollspy on the main nav element
+        const mainNav = document.body.querySelector("#mainNav");
+        if (mainNav) {
+          new bootstrap.ScrollSpy(document.body, {
+            target: "#mainNav"
+          });
+        }
+
+        // Collapse responsive navbar when toggler is visible
+        const navbarToggler = document.body.querySelector(".navbar-toggler");
+        const responsiveNavItems = [].slice.call(
+          document.querySelectorAll("#navbarResponsive .nav-link")
+        );
+        responsiveNavItems.map(function (responsiveNavItem) {
+          responsiveNavItem.addEventListener("click", () => {
+            if (window.getComputedStyle(navbarToggler).display !== "none") {
+              navbarToggler.click();
+            }
+          });
+        });
+      });
+    </script>
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "319530c9c18349fa93c9a094f1a8f218"}'
+    ></script>
+    <!-- End Cloudflare Web Analytics -->
+  </body>
+</html>

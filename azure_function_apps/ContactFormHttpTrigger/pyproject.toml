@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ContactFormHttpTrigger"
+version = "0.1.0"
+description = "Azure Functions App to process a contact form submission and send an email"
+authors = ["Tom Barone <mail@tombarone.net>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+azure-functions = "^1.12.0"
+flanker = "^0.9.11"
+sendgrid = "^6.9.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,20 @@
+attrs==22.2.0 ; python_version >= "3.10" and python_version < "4.0"
+azure-functions==1.12.0 ; python_version >= "3.10" and python_version < "4.0"
+cffi==1.15.1 ; python_version >= "3.10" and python_version < "4.0"
+chardet==5.1.0 ; python_version >= "3.10" and python_version < "4.0"
+cryptography==39.0.0 ; python_version >= "3.10" and python_version < "4.0"
+flanker==0.9.11 ; python_version >= "3.10" and python_version < "4.0"
+idna==3.4 ; python_version >= "3.10" and python_version < "4.0"
+ply==3.11 ; python_version >= "3.10" and python_version < "4.0"
+pycparser==2.21 ; python_version >= "3.10" and python_version < "4.0"
+python-http-client==3.3.7 ; python_version >= "3.10" and python_version < "4.0"
+regex==2022.10.31 ; python_version >= "3.10" and python_version < "4.0"
+sendgrid==6.9.7 ; python_version >= "3.10" and python_version < "4.0"
+six==1.16.0 ; python_version >= "3.10" and python_version < "4.0"
+starkbank-ecdsa==2.2.0 ; python_version >= "3.10" and python_version < "4.0"
+tld==0.12.6 ; python_version >= "3.10" and python_version < "4"
+webob==1.8.7 ; python_version >= "3.10" and python_version < "4.0"
+
+# Do not include azure-functions-worker in this file
+# The Python Worker is managed by the Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
