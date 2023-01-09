@@ -6,15 +6,17 @@ endif
 
 # Primary targets
 
-deploy: guard-AZURE_ACCOUNT_NAME build
+deploy: guard-AZURE_ACCOUNT_NAME guard-AZURE_SERVICE_PRINCIPAL_USERNAME guard-AZURE_SERVICE_PRINCIPAL_PASSWORD guard-AZURE_SERVICE_PRINCIPAL_TENANT #build
 	$(eval NOW=$(shell date -u '+%FT%TZ'))
 	# Upload to azure all the files in the _site build folder
-	echo 'Time is $(NOW)'
-	az storage blob upload-batch --source ./_site --destination '$$web' --account-name $(AZURE_ACCOUNT_NAME) --overwrite
+	@echo 'Time is $(NOW)'
+	az login --service-principal --username $(AZURE_SERVICE_PRINCIPAL_USERNAME) --password=$(AZURE_SERVICE_PRINCIPAL_PASSWORD) --tenant $(AZURE_SERVICE_PRINCIPAL_TENANT)
+	az storage blob upload-batch --auth-mode login --source ./_site --destination '$$web' --account-name $(AZURE_ACCOUNT_NAME) --overwrite
 	# Remove any dangling files that may be left over in azure
 	# i.e any files that didn't get touched during this deployment
-	echo 'Removing all files that are unmodified since $(NOW)'
-	az storage blob delete-batch --source '$$web' --account-name $(AZURE_ACCOUNT_NAME) --if-unmodified-since '$(NOW)'
+	@echo 'Removing all files that are unmodified since $(NOW)'
+	az storage blob delete-batch --auth-mode login --source '$$web' --account-name $(AZURE_ACCOUNT_NAME) --if-unmodified-since '$(NOW)'
+	az logout
 
 install:
 	bundle install
@@ -29,7 +31,7 @@ dev:
 test: install
 	cd azure_function_apps/ContactFormHttpTrigger && poetry run python -m unittest discover
 
-clean: 
+clean:
 	rm -rf ./_site
 
 # Secondary targets
@@ -46,4 +48,4 @@ dev-contact-form-http-trigger: install
 # Guard to fail the make target if the specified env variable doesn't exist
 # https://lithic.tech/blog/2020-05/makefile-wildcards
 guard-%:
-	if [ -z '${${*}}' ]; then echo 'ERROR: variable $* not set' && exit 1; fi
+	@if [ -z '${${*}}' ]; then echo 'ERROR: variable $* not set' && exit 1; fi
