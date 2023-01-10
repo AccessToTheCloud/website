@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
   // Navbar shrink function
-  var navbarShrink = function () {
+  let navbarShrink = function () {
     const navbarCollapsible = document.body.querySelector("#mainNav");
     if (!navbarCollapsible) {
       return;
@@ -61,13 +61,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Send message ajax request
   const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
+  if (contactForm && window.CONTACT_FORM_ENDPOINT_TRIGGER) {
     contactForm.addEventListener("submit", function (event) {
       // Stop from reloading the page
       event.preventDefault();
 
       // Set button spinner
-      //const submitButton = document.getElementById("submitButton");
+      const submitButton = document.getElementById("submitButton");
+      submitButton.classList.add("loading");
+      submitButton.disabled = true;
 
       // Reset messages
       const success_message = document.getElementById("submit-success-message");
@@ -76,19 +78,21 @@ window.addEventListener("DOMContentLoaded", () => {
       error_message.classList.add("d-none");
 
       // Get email details
-      const name = document.getElementById("contact-name").value;
-      const email = document.getElementById("contact-email").value;
-      const message = encodeURI(document.getElementById("contact-message").value)
+      const name = encodeURI(document.getElementById("contact-name").value);
+      const email = encodeURI(document.getElementById("contact-email").value);
+      const message = encodeURI(
+        document.getElementById("contact-message").value
+      );
 
       // Send AJAX request
       let xhr = new XMLHttpRequest();
       const url =
-        //"https://attc-website-email-trigger.azurewebsites.net/api/send-email?name=" +
-        "http://localhost:7071/api/send-email?name=" +
+        window.CONTACT_FORM_ENDPOINT_TRIGGER +
+        "/api/send-email?name=" +
         name +
         "&email=" +
         email +
-        "&body=" +
+        "&message=" +
         message;
       xhr.open("GET", url, true);
       xhr.onreadystatechange = () => {
@@ -101,6 +105,9 @@ window.addEventListener("DOMContentLoaded", () => {
           } else {
             error_message.classList.remove("d-none");
           }
+					// Reset button spinner
+          submitButton.classList.remove("loading");
+          submitButton.disabled = false;
         }
       };
       xhr.send();

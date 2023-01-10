@@ -3,72 +3,90 @@
 //
 
 section.section-contact {
-  background-color: $gray-900;
+	background-color: $gray-900;
 
-  //background-image: url("../assets/img/map-image.png");
-  background-repeat: no-repeat;
-  background-position: center;
+	//background-image: url("../assets/img/map-image.png");
+	background-repeat: no-repeat;
+	background-position: center;
 
-  // Set the mailto email to white
-  & a {
-    color: $white;
-  }
+	// Set the mailto email to white
+	& a {
+		color: $white;
+	}
 
-  .section-heading {
-    color: $white;
-  }
+	.section-heading {
+		color: $white;
+	}
 
-  form#contactForm {
-    .form-group {
-      margin-bottom: $grid-gutter-width;
+	form#contactForm {
+		#submitButton {
+			div.button-text {
+				display: block;
+			}
+			div.spinner-border {
+				display: none;
+			}
+		}
 
-      input,
-      textarea {
-        padding: 1.25rem;
-      }
+		#submitButton.loading {
+			div.button-text {
+				display: none;
+			}
+			div.spinner-border {
+				display: block;
+			}
+		}
 
-      input.form-control {
-        height: auto;
-      }
-    }
+		.form-group {
+			margin-bottom: $grid-gutter-width;
 
-    .form-group-textarea {
-      textarea {
-        min-height: 10rem;
-      }
-    }
+			input,
+			textarea {
+				padding: 1.25rem;
+			}
 
-    p.help-block {
-      margin: 0;
-    }
+			input.form-control {
+				height: auto;
+			}
+		}
 
-    .form-control:focus {
-      border-color: $primary;
-      box-shadow: none;
-    }
+		.form-group-textarea {
+			textarea {
+				min-height: 10rem;
+			}
+		}
 
-    ::-webkit-input-placeholder {
-      font-family: $headings-font-family;
-      font-weight: $headings-font-weight;
-      color: $gray-400;
-    }
+		p.help-block {
+			margin: 0;
+		}
 
-    :-moz-placeholder {
-      font-family: $headings-font-family;
-      font-weight: $headings-font-weight;
-      color: $gray-400;
-    }
+		.form-control:focus {
+			border-color: $primary;
+			box-shadow: none;
+		}
 
-    ::-moz-placeholder {
-      font-family: $headings-font-family;
-      font-weight: $headings-font-weight;
-      color: $gray-400;
-    }
+		::-webkit-input-placeholder {
+			font-family: $headings-font-family;
+			font-weight: $headings-font-weight;
+			color: $gray-400;
+		}
 
-    :-ms-input-placeholder {
-      font-family: $headings-font-family;
-      font-weight: $headings-font-weight;
-      color: $gray-400;
-    }
-  }
+		:-moz-placeholder {
+			font-family: $headings-font-family;
+			font-weight: $headings-font-weight;
+			color: $gray-400;
+		}
+
+		::-moz-placeholder {
+			font-family: $headings-font-family;
+			font-weight: $headings-font-weight;
+			color: $gray-400;
+		}
+
+		:-ms-input-placeholder {
+			font-family: $headings-font-family;
+			font-weight: $headings-font-weight;
+			color: $gray-400;
+		}
+	}
 }
