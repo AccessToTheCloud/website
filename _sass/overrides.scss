@@ -1,0 +1,20 @@
+// Fix issue when hovering over an active link
+a.nav-link.active:hover {
+  color: $yellow !important;
+}
+
+// Text siees for things
+p,
+pre,
+td,
+th {
+  line-height: $line-height-lg;
+  font-size: calc(0.7rem + 0.5vw);
+}
+
+.full-page-content {
+  @include media-breakpoint-up(lg) {
+    padding-right: calc(3rem + 15vw) !important;
+    padding-left: calc(3rem + 15vw) !important;
+  }
+}

@@ -1,0 +1,10 @@
+---
+---
+
+// Set the default color to slightly grey
+$body-color: #3d3d3d;
+
+@import "vendor/minima/minima";
+// Implicitly imports bootstrap from vendor/bootstrap as well
+@import "vendor/startbootstrap/styles";
+@import "overrides";

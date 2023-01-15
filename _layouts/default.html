@@ -1,57 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    {% seo %} {% feed_meta %}
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="msapplication-TileColor" content="#2b5797" />
-    <meta name="theme-color" content="#ffffff" />
-
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css" />
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/base.css" />
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/import.css" />
-    <meta charset="utf-8" />
-  </head>
+<html class="no-js" lang="en">
+  {% include head.html %}
   <body>
     <div id="page-container">{{ content }}</div>
     <div id="page-background">
       <canvas class="particles"></canvas>
     </div>
-    <!-- Set the correct contact form http endpoint -->
-    <script>
-      if ("{{ jekyll.environment }}" == "development")
-        window.CONTACT_FORM_ENDPOINT_TRIGGER = "http://localhost:7071";
-      else if ("{{ jekyll.environment }}" == "production")
-        window.CONTACT_FORM_ENDPOINT_TRIGGER =
-          "https://attc-website-email-trigger.azurewebsites.net";
-    </script>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script
-      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Cool looking particle things for the masthead -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="{{ site.baseurl }}/javascript/modernizr-3.11.2.min.js"></script>
-    <script src="{{ site.baseurl }}/javascript/plugins.js"></script>
-    <script src="{{ site.baseurl }}/javascript/main.js"></script>
-    <!-- Cloudflare Web Analytics -->
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "319530c9c18349fa93c9a094f1a8f218"}'
-    ></script>
-    <!-- End Cloudflare Web Analytics -->
   </body>
+  {% include scripts.html %}
 </html>
