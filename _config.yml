@@ -13,18 +13,6 @@ author:
   email: mail@tombarone.net
   url: https://tombarone.net
 
-collections:
-  staff_members:
-    people: true
-
-defaults:
-  - scope:
-      path: "/assets/icons"
-    values:
-      output: true
-      # Stick all the icon files and things into the root folder on build
-      permalink: /
-
 email_endpoint: "https://attc-website-email-trigger.azurewebsites.net"
 
 timezone: Australia/Adelaide
