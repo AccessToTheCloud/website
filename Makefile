@@ -18,7 +18,7 @@ deploy: guard-AZURE_ACCOUNT_NAME guard-AZURE_SUBSCRIPTION_ID guard-AZURE_RESOURC
 	@echo 'Purging CDN endpoint'
 	az cdn endpoint purge --ids /subscriptions/$(AZURE_SUBSCRIPTION_ID)/resourcegroups/$(AZURE_RESOURCE_GROUP)/providers/Microsoft.Cdn/profiles/AttcStaticWebsiteCDN/endpoints/attc-static-website-cdn --content-paths '/*'
 	@echo 'Deploying email trigger function app to azure'
-	cd azure_function_apps/ContactFormHttpTrigger && func azure functionapp publish attc-website-email-trigger --build remote
+	cd azure_function_apps/ContactFormHttpTrigger && func azure functionapp publish attc-website-email-trigger --build remote --python
 
 install:
 	cd jekyll && bundle install
