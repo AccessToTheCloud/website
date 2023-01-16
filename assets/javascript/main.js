@@ -41,7 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Activate Bootstrap scrollspy on the main nav element
   const mainNav = document.body.querySelector("#mainNav");
   if (mainNav) {
-    new bootstrap.ScrollSpy(document.body, {
+    window.navigationScrollSpy = new bootstrap.ScrollSpy(document.body, {
       target: "#mainNav",
     });
   }
@@ -105,7 +105,7 @@ window.addEventListener("DOMContentLoaded", () => {
           } else {
             error_message.classList.remove("d-none");
           }
-					// Reset button spinner
+          // Reset button spinner
           submitButton.classList.remove("loading");
           submitButton.disabled = false;
         }

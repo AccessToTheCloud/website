@@ -45,7 +45,7 @@ azure-login: guard-AZURE_SERVICE_PRINCIPAL_USERNAME guard-AZURE_SERVICE_PRINCIPA
 	@az login --service-principal --username $(AZURE_SERVICE_PRINCIPAL_USERNAME) --password=$(AZURE_SERVICE_PRINCIPAL_PASSWORD) --tenant $(AZURE_SERVICE_PRINCIPAL_TENANT)
 
 dev-jekyll-server: build
-	echo $(JEKYLL_ENV)
+	@echo 'Running Jekyll in environment: $(JEKYLL_ENV)'
 	bundle exec jekyll serve --livereload --open-url --port 4001 --livereload-port 35730
 
 dev-azurite-server: install

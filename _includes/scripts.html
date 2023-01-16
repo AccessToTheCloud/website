@@ -25,6 +25,8 @@
 <script src="{{ site.baseurl }}/assets/javascript/modernizr-3.11.2.min.js"></script>
 <script src="{{ site.baseurl }}/assets/javascript/plugins.js"></script>
 <script src="{{ site.baseurl }}/assets/javascript/main.js"></script>
+
+{% if jekyll.environment == 'production' %}
 <!-- Cloudflare Web Analytics -->
 <script
   defer
@@ -34,3 +36,4 @@
   data-cf-beacon='{"token": "319530c9c18349fa93c9a094f1a8f218"}'
 ></script>
 <!-- End Cloudflare Web Analytics -->
+{% endif %}
