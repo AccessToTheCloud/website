@@ -1,10 +1,2 @@
 # Where all our secrets are passed through
 .env
-
-# Jekyll ignores
-_site/
-.sass-cache/
-.jekyll-metadata/
-.jekyll-cache/
-.bundle/
-./vendor
