@@ -1,7 +1,7 @@
 # See here for list of installed packages under 'ubuntu-22.04'
 # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
 
-name: "continuous integration and deployment"
+name: "CICD"
 on:
   push:
     branches: ["master"]
