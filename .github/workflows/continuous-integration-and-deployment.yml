@@ -1,13 +1,13 @@
 # See here for list of installed packages under 'ubuntu-22.04'
 # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
 
-name: 'continuous integration and deployment'
+name: "continuous integration and deployment"
 on:
   push:
-    branches: ['master']
+    branches: ["master"]
 jobs:
   test_scan_deploy:
-    runs-on: 'ubuntu-22.04'
+    runs-on: "ubuntu-22.04"
     env:
       AZURE_ACCOUNT_NAME: ${{ secrets.AZURE_ACCOUNT_NAME }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -16,37 +16,41 @@ jobs:
       AZURE_SERVICE_PRINCIPAL_PASSWORD: ${{ secrets.AZURE_SERVICE_PRINCIPAL_PASSWORD }}
       AZURE_SERVICE_PRINCIPAL_TENANT: ${{ secrets.AZURE_SERVICE_PRINCIPAL_TENANT }}
     steps:
-      - name: 'Checkout code'
-        uses: 'actions/checkout@v3'
+      - name: "Checkout code"
+        uses: "actions/checkout@v3"
         with:
-          fetch-depth: 0  # Deep clone for use with SonarCloud
-          
-      - name: 'Install Ruby and gems'
-        uses: 'ruby/setup-ruby@v1'
+          fetch-depth: 0 # Deep clone for use with SonarCloud
+
+      - name: "Install Azure Functions Core Tools"
+        run: "sudo apt-get install -y azure-functions-core-tools-4"
+
+      - name: "Install Ruby and gems"
+        uses: "ruby/setup-ruby@v1"
         with:
-          ruby-version: '2.7.3'
+          ruby-version: "2.7.3"
+          working-directory: "./jekyll"
           bundler-cache: true
 
-      - name: 'Setup poetry'
-        uses: 'abatilo/actions-poetry@v2'
+      - name: "Setup poetry"
+        uses: "abatilo/actions-poetry@v2"
         with:
           poetry-version: "1.3.1"
 
-      - name: 'Run tests'
-        run: 'make test'
+      - name: "Run tests"
+        run: "make test"
 
-      - name: 'Scan with SonarCloud'
-        uses: 'SonarSource/sonarcloud-github-action@master'
+      - name: "Scan with SonarCloud"
+        uses: "SonarSource/sonarcloud-github-action@master"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: 'Check SonarCloud results and fail pipeline if failed'
+      - name: "Check SonarCloud results and fail pipeline if failed"
         run: |
           sleep 30s # Wait for results to be uploaded
           GATE_STATUS=$(curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=tom-barone_JQC --silent | jq .projectStatus.status)
           echo "Gate status: $GATE_STATUS"
           [[ $GATE_STATUS != "ERROR" ]] # Will fail if equal to ERROR
 
-      - name: 'Deploy to azure'
-        run: 'make deploy'
+      - name: "Deploy to azure"
+        run: "make deploy"
