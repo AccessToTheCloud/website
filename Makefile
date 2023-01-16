@@ -6,7 +6,7 @@ endif
 
 # Primary targets
 
-deploy: guard-AZURE_ACCOUNT_NAME build azure-login
+deploy: guard-AZURE_ACCOUNT_NAME guard-AZURE_SUBSCRIPTION_ID guard-AZURE_RESOURCE_GROUP build azure-login
 	$(eval NOW=$(shell date -u '+%FT%TZ'))
 	# Upload to azure all the files in the _site build folder
 	@echo 'Time is $(NOW)'
@@ -16,7 +16,7 @@ deploy: guard-AZURE_ACCOUNT_NAME build azure-login
 	@echo 'Removing all files that are unmodified since $(NOW)'
 	az storage blob delete-batch --auth-mode login --source '$$web' --account-name $(AZURE_ACCOUNT_NAME) --if-unmodified-since '$(NOW)'
 	@echo 'Purging CDN endpoint'
-	az cdn endpoint purge --ids /subscriptions/86dc3cdb-5ddb-43db-baee-6b86576c3ef6/resourcegroups/Marketing/providers/Microsoft.Cdn/profiles/AttcStaticWebsiteCDN/endpoints/attc-static-website-cdn --content-paths '/*'
+	az cdn endpoint purge --ids /subscriptions/$(AZURE_SUBSCRIPTION_ID)/resourcegroups/$(AZURE_RESOURCE_GROUP)/providers/Microsoft.Cdn/profiles/AttcStaticWebsiteCDN/endpoints/attc-static-website-cdn --content-paths '/*'
 	@echo 'Deploying email trigger function app to azure'
 	cd azure_function_apps/ContactFormHttpTrigger && func azure functionapp publish attc-website-email-trigger --build remote
 
